@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="vue.js"></script>
+</head>
+<style>
+	
+</style>
+<body>
+	<div id="app">
+		<ul>
+			<li>{{ flowers.item }}{{index}}</li>
+		</ul>
+	</div>
+	<script>
+		const app  = new Vue({
+			el:'#app',
+			data:{
+				flowers:['月季','玫瑰','百合','海棠']
+			},
+			methods:{
+			}
+		})
+	</script>
+
+</body>
+</html>

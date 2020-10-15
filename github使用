@@ -1,0 +1,11 @@
+搜索stars大于1000的库，而且是关于python的，就可以在搜索框内这样写
+stars:>1000 python
+要stars和fork都大于1000的话
+stars：>1000 fork:>1000 python
+in:name :关键字
+in:description :关键字
+in:description python教程
+pushed:>时间+关键字
+pushed:>2019-03-01 python
+user:用户名
+language:python
