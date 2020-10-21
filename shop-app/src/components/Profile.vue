@@ -1,6 +1,8 @@
 <template>
 	<div class="profile">
-		<p>这是我的</p>
+		<div class="login">
+			<el-button>登录</el-button>
+		</div>
 	</div>
 </template>
 <script>
