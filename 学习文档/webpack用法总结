@@ -1,0 +1,219 @@
+webpack使用
+
+安装webpack 
+cnpm install --save-dev webpack(本地安装)（ubuntu可能需要sudo才能安装成功）cnpm install --g webpack 全局安装
+
+如果使用wenpack4+以上版本，还需要安装webpackp-cli
+cnpm install --save-dev webpack-cli
+
+
+
+本地新建一个文件夹，作为项目文件夹 进入文件夹
+在项目内直接安装webpack webpack-cli
+npm install --save-dev webpack webpack-cli
+
+初始化项目：npm init(执行完毕得到一个packeage.json文件,在json文件中添加注释是会报错的)
+加-y是快捷安装,不需要你输入文件说明等
+cnpm init -y 
+
+在webpack4中通过mode 指定环境
+
+要在packsge.json中(mode的值可以为development，表示的是开发模式，或者是production，表示的是生产模式。none为不指定)
+"scripts":{
+   "start": "webpack-dev-server --mode development --output-public-path dist --open",
+    "dev": "webpack --mode development --watch ",
+    "build": "webpack --mode production"
+}
+
+在使用命令 npm run start开启server，
+使用npm run dev开启开发模式下的打包并监听，
+使用npm run build进行生产模式下的打包，
+
+
+
+在项目里新建两个文件夹，文件夹src和dist文件夹,在src文件夹里面添加index.js,
+src:放置入口文件 index.js
+dist:放置打包后的文件main.js(出口文件)
+static:放置样式文件以及各种静态文件
+
+
+
+webpack4默认配置，入口文件默认src/index.js，输出默认dist/main.js
+
+在根目录创webpack.config.js配置文件,配置文件
+[
+	var path = require('path');
+	var webpack = require('webpack');
+        
+	module.exports  = {
+
+	entry:path.resolve("./src/index.js");	//入口文件
+
+	output:{	//出口文件
+	path:path.resolve(__dirname,"./dist");
+	filename:'[name].js',	
+		
+	},
+	
+	module:{
+	rules:[//相关规则
+	{
+	test:/\.css$/ //正则表达式：根据后缀为.css文件来匹配css文件
+	use:[
+	{loader:'style-loader'},
+	{loader:'css-loader',
+	options:{
+	modules:true	
+	}}]
+	
+	test: /\.(png|svg|jpg|gif)$/,//加载图片
+        use: ["file-loader"]，
+
+	test: /\.(woff|woff2|eot|ttf|otf)$/,//加载字体
+        use: ["file-loader"],
+	
+	}
+	]
+	
+	} //loader相关配置
+	plugins:[]//插件，相关配置
+	mode:'development'//设置模式为开发者模式
+	}
+
+]
+
+配置项其实也就只有五个，分别是 ： 入口 entry 、 出口 output 、Loader loader 、 插件 plugins 、 模式 mode
+入口和出口，分别制定在哪里寻找项目依赖的资源文件，把资源文件打包后放在哪个目录下面。
+
+插件：插件用来增加一些特定功能，比如，代码压缩。再比如，观察现在的项目，正个打包过程，都没有 html 文件参与进来。如果我们希望 html 文件也参与进来，就需要一个特定插件 html-webpack-plugin
+
+
+在配置文件里
+var HtmlWebpackPlugin  = require('html-webpack-plugin');
+
+webpack 默认只认得 js 文件，想让其他资源文件也参与进来，就需要使用 loader
+
+入口文件要引入打包的文件以及要加载的各种文件
+
+style-loader 和 css-loader 来处理 css 资源
+less less-loader 加载less文件
+file-loader 加载图片
+url-loader 加载字体
+
+
+
+在下载webpack和webpack-cli时用了npm。而其他插件用的是cnpm。
+将node-modules文件夹全部删除，重新使用cnpm i下载之后就没有错了。
+得到一个教训，一个项目的插件要么全部用cnpm下载，要么全部用npm下载。
+
+
+
+因为打包太多次文件,导致dist文件里面相当的混乱,webpack打包的时候,webpack 会生成文件，然后将这些文件放置在 /dist 文件夹中，但是 webpack 无法追踪到哪些文件是实际在项目中用到的。
+
+通常，在每次构建前清理 /dist 文件夹，是比较推荐的做法，因此只会生成用到的文件。让我们完成这个需求。
+
+clean-webpack-plugin 是一个比较普及的管理插件，让我们安装和配置下。
+
+cnpm install clean-webpack-plugin --save-dev
+然后在webpack.config.js中
+
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+​
+// 在plugins里面添加
+ plugins: [
+    new HtmlWebpackPlugin({
+      title: "Output Management"
+    }),
+   + new CleanWebpackPlugin(["dist"])
+  ]
+
+
+
+
+使用webpack-dev-server热更新
+
+安装webpack-dev-server
+
+cnpm install --save-dev webpack-dev-server
+
+在webpack.config.js中配置:默认端口是8080,contentBase设置可访问的文件夹
+
+devServer: {
+    contentBase: "./dist"  // 默认localhost:8080 下建立服务，将 dist 目录下的文件，作为可访问文件。
+  },
+在package.json文件里面添加star的命令,这样只要输入运行cnpm run start 就能自动打开浏览器,而实现自动打开浏览器的配置是--open
+
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+   + "start": "webpack-dev-server --open"
+  }
+或则你可以设置为dev命令也行,我的习惯是dev命令
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+  + "dev": "webpack-dev-server --open"
+  }
+如果你希望打开的端口不是8080，而是自己定义的话，你可以添加在dev或则start里面添加--port 端口号
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+  + "dev": "webpack-dev-server --port 3000 --open"    // 我这里设置打开的端口号是3000
+  }
+如果你希望打开服务器之后，在页面不关闭的情况下，你每次修改都能自动刷新（俗称热加载），那么你就在dev或则start里面添加--hot配置
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+  + "dev": "webpack-dev-server --port 3000 --hot --open"    // 我这里设置打开的端口号是3000
+  }
+观察者模式
+如果其中一个文件被更新，代码将被重新编译，所以你不必手动运行整个构建。
+
+在package.json文件中
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+  +  "watch": "webpack --watch",
+    "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --hot --port 3000 --open"
+  },
+然后我们可以在index.js中引入的js文件里面修改,例如我给print.js添加了一句话
+
+export default function printMe() {
+  console.log("I get called from print.js!");
++  console.log("嘟嘟是个傻逼狗子");
+}
+
+
+
+
+运行 npm run server 
+
+
+webpack将会根据webpack.config.js文件，将以./src/main.js为入口的模块打包，输出到./output/main.js中。这样index.html将会引入打包后的js文件，从而实现了相关的交互
+入口文件app.js中引入base.css。配置文件中针对.css文件应用了css-loader,style-loader,注意这里loader的顺序不能颠倒，webpack是自下而上解析的，只有通过css-loader处理css后才能通过style-loader生成<style></style>标签。
+将打包后的app.bundle.js文件引入html可以看到背景变为灰色，并且生成了的<style></style>标签插入到<head></head>中
+index.html是入口页面，可以引进出口打包好的文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

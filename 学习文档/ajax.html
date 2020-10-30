@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div></div>
+
+</body>
+</html>
+<script>
+	function ajax(options){
+		options = options || {};
+		options.type = (options.type || "GET").toUpperCase();
+		options.dataType = options.dataType || "json";
+
+		var params = formatParams(options.data);
+
+		var xhr;
+
+		if(window.XMLHttpRequest){
+			xhr  = new XMLHttpRequest();
+		}else if(window.ActiveObject){
+			xhr  = new ActiveObject('Microsoft.XMLHTTP');
+		}
+
+		if(options.type == "GET"){
+			xhr.open("GET",options.url+"?"+params,true);
+			xhr.send(null);
+		}else if(options.type == "POST"){
+			xhr.open("POST",options.url,true);
+
+			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xhr.send(params);
+		}
+		setTimeout(function(){
+			if(xhr.readySate!=4){
+				xhr.abort();
+			}
+		},options.timeout)
+
+		xhr.responseText,xhr.responseXML
+	}
+</script>

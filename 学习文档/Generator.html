@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+
+</body>
+</html>
+<script type="text/javascript">
+	function* helloWordGenerator(){
+        yield "lalalalalal";
+        yield "hahahahahhaha";
+        yield "hehheheheheeh";
+        return "ending";
+    } 
+    var hw  = helloWordGenerator();
+    console.log(hw.next());
+    console.log(hw.next());
+    console.log(hw.next());
+    console.log(hw.next());
+    console.log(hw.next());
+
+
+function* gen(){
+    yield 12+12;
+    yield 4*5;
+    yield "a==1";
+    yield "b==2";
+    return 0;
+}
+var ge  = gen();
+console.log(ge.next());
+console.log(ge.next());
+
+console.log(ge.next());
+
+console.log(ge.next());
+console.log(ge.next());
+
+console.log(ge.next());
+console.log(ge.next());
+
+
+function* demo(){
+    console.log("hello" + (yield));
+    console.log("world" + (yield 12+1));
+}
+var gen = demo();
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+
+
+function* demo(){
+    foo(yield 12+3,yield 2*6);
+    var name  = yield;
+}
+var gen = demo();
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+
+
+
+
+</script>

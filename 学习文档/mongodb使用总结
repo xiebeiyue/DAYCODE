@@ -1,0 +1,39 @@
+启动mongodb数据库
+启动mongoDB并将其添加为启动时启动的服务
+systemctl start mongod
+systemctl enable mongod
+
+
+
+进入mongodb(验证：是否成功)
+mongo
+
+use <数据名>
+
+如果数据库不存在，则创建数据库，否则切换到指定数据库
+
+db.createCollection("集合名")
+
+show dbs
+显示数据库，需要注意的是show dbs，只会显示有数据的库，没有数据的库，
+是不会显示的。下图中，dqs数据库中，开始没有数据，所以不会显示，
+当我插入一条数据库后，show dbs 就会显示它
+
+db.stats()
+查看当前数据的状态
+
+删除集合
+1、show collections 查看当前数据库所有集合
+2、db.集合名.drop()
+
+插入文档数据
+db.集合名.insert(文档内容)
+
+show collections//查看集合表
+
+db.collectionName.find()查看集合表内容
+
+
+
+
+

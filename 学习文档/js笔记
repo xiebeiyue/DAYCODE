@@ -1,0 +1,10 @@
+
+js 写在head标签内需要写上window.onload包着，要不然会报错，因为执行js时页面标签没有加载。window.onload的作用是当页面加载完成后自动触发事件。
+语法约定
+（1）代码区分大小写
+小写写成大写会报错：Uncaught SyntaxError: Unexpected identifier
+（2）变量、对象和函数的名称
+当声明变量、对象和函数的名称时大小写，数字，下划线，美元符号都可以，但是必须以字母，下划线，美元符号开头
+否则会报错：Uncaught SyntaxError: Invalid or unexpected token
+（3）分号
+如果不写会报错：Uncaught SyntaxError: Invalid or unexpected token
