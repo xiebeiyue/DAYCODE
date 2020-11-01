@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     <Nav></Nav>
   </div>
 </template>
@@ -16,13 +18,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "./assets/css/element-ui-modify.scss";
+@import "./assets/css/variable.scss";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Microsoft YaHei","微软雅黑",'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: $GobalFontSize;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 </style>

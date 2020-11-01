@@ -1,10 +1,10 @@
 <template>
 	<div class="home">
 		<HomeHeader></HomeHeader>
-		<!-- <div class="home-main">
+		<div class="home-main">
 		<transition-group enter-active-class="slideInRight">
         <ul class="goods animated" :key="animatedCurrentKey">
-          <li v-for="item in goods" class="one-com" v-show="isCurrent(item.kind)">
+          <li v-for="item in goods" :key="item" class="one-com" v-show="isCurrent(item.kind)">
             <one-commodity
               :itemId="item.id"
               :imgUrl="item.img"
@@ -19,11 +19,12 @@
           <p class="no-more-goods">没有更多商品啦，敬请期待!!!</p>
         </div>
       </transition-group>
-		</div> -->
+		</div>
 	</div>
 </template>
 <script>
 	import HomeHeader from './HomeHeader'
+	import OneCommodity from './HomeOneCommodity'
 	export default{
 		name:'Home',
 		// data(){
@@ -47,7 +48,9 @@
 		// 	},
 		// },
 		components:{
-			HomeHeader
+			HomeHeader,
+			OneCommodity,
+
 		}
 		// mounted () {
 		// 	let that  = this
@@ -66,29 +69,31 @@
 	}
 	
 </script>
-<style>
-	.home{
-		width: 100%;
-		padding-bottom:65px;
-		padding-top: 80px;
-	}
-	.home-main{
-		width: 100%;
-		overflow-x: hidden;
-	}
-	.goods{
-		width: 100%;
-		list-style-type: none;
-		padding:0;
-	}
-	.goods>li{
-		width: 100%;
-	}
-	.no-more-goods{
-		height: 40px;
-		line-height: 40px;
-	}
-	.slideInRight{
-		animation-duration:0.25s;
-	}
+<<style lang="scss" scoped>
+@import "../assets/css/variable.scss";
+
+.home{
+  width: 100%;
+  padding-bottom: $NavHeight + 5px;
+  padding-top: $HomeHeaderHeight;
+}
+.home-main{
+  width: 100%;
+  overflow-x: hidden;
+}
+.goods{
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+.goods>li{
+  width: 100%;
+}
+.no-more-goods{
+  height: 40px;
+  line-height: 40px;
+}
+.slideInRight{
+  animation-duration: 0.25s;
+}
 </style>
