@@ -72,7 +72,7 @@
 			},
 			goToDetailsPage(){
 				this.$store.push({
-					path:'/DetailsPage',
+					path:'/detailsPpge',
 					query:this.onecommodity,
 				});
 				this.$store.state.cartCounter++;

@@ -139,13 +139,13 @@ export default {
       let isLogin = this.$store.state.isLogin;
       if (!isLogin) {
         this.$router.push({
-          path: '/Login'
+          path: '/login'
         })
         return;
       }
       if (this.cartGoods.length > 0) {
         this.$router.push({
-          path: '/OrderForm',
+          path: '/orderform',
           query: {
             cartGoods: this.cartGoods,
             pay: this.pay

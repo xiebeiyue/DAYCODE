@@ -53,9 +53,9 @@
 
 		},
 		mounted (){
-			this.axios.get('http://localhost:7777/static/data/goods.json')
+			this.axios.get('http://localhost:8080/static/data/goods.json')
 			.then(res => {
-				this.goods = [...res.data];
+				this.goods = res.data;
 				console.log(res.data);
 			}).catch((res) => {
 				console.log(res);

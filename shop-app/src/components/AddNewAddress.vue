@@ -71,7 +71,7 @@ export default {
   methods: {
     toProfile () {
       this.$router.push({
-        path: '/Profile/EditAddressPage'
+        path: '/editaddresspage'
       })
       //解决主页与详情页切换时，菜单栏无法更新获取当前路由的问题
       this.$store.state.cartCounter++;
@@ -82,7 +82,7 @@ export default {
         if (valid) {
           this.$store.commit('addNewAddress', this.newAddForm);
           this.$router.push({
-            path: '/editAddressPage'
+            path: '/editaddresspage'
           })
         } else {
           return false;
