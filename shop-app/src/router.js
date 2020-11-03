@@ -8,7 +8,7 @@ var resultComps=[];
 let files  = require.context('./components',false,/\.vue$/);
 files.keys().forEach(fileName =>{
 	var name  = fileName.replace(/^\.\//,'');
-    console.log(name);
+    // console.log(name);
 	name  = name.replace(/\.vue$/,'');
 	resultComps.push({
 		path:'/' + name.toLowerCase(),

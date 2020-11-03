@@ -4,7 +4,7 @@ import router from "./router"
 import store from './store'
 import axios from 'axios'
 import ElementUI from 'element-ui';
-// import VueAxios from 'vue-axios'
+import VueAxios from 'vue-axios'
 import 'element-ui/lib/theme-chalk/index.css';
 
 // import '../ui/element-ui.js'
@@ -15,8 +15,8 @@ import './assets/css/vue2-animate.css'
 
 Vue.use(ElementUI);
 
-// Vue.use(VueAxios,axios)
-Vue.prototype.$ajax = axios;
+Vue.use(VueAxios,axios)
+// Vue.prototype.axios = axios;
 
 Vue.config.productionTip = false
 

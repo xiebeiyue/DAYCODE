@@ -27,45 +27,41 @@
 	import OneCommodity from './HomeOneCommodity'
 	export default{
 		name:'Home',
-		// data(){
-		// 	return{
-		// 		goods:[]
-		// 	}
-		// },
-		// computed:{
-		// 	animatedCurrentKey(){
-		// 		return this.$store.state.GoodsCurrentSelKind;
-		// 	}
-		// },
-		// methods:{
-		// 	isCurrent (itemKind){
-		// 		let currentKind = this.$store.state.GoodsCurrentSelKind;
-		// 		if(currentKind === 0) {
-		// 			return true;
-		// 		}else{
-		// 			return itemKind === currentKind;
-		// 		}
-		// 	},
-		// },
+		data(){
+			return{
+				goods:[]
+			}
+		},
+		computed:{
+			animatedCurrentKey(){
+				return this.$store.state.GoodsCurrentSelKind;
+			}
+		},
+		methods:{
+			isCurrent (itemKind){
+				let currentKind = this.$store.state.GoodsCurrentSelKind;
+				if(currentKind === 0) {
+					return true;
+				}else{
+					return itemKind === currentKind;
+				}
+			},
+		},
 		components:{
 			HomeHeader,
 			OneCommodity,
 
+		},
+		mounted (){
+			this.axios.get('http://localhost:7777/static/data/goods.json')
+			.then(res => {
+				this.goods = [...res.data];
+				console.log(res.data);
+			}).catch((res) => {
+				console.log(res);
+				
+			})
 		}
-		// mounted () {
-		// 	let that  = this
-		// 	that.axios.get('/shop-app/static/data/github-goods.json')
-		// 	.then(res => {
-		// 		that.goods = [...res.data];
-		// 	})
-		// 	console.log(this.data)
-		// 	.catch(() => {
-		// 		that.axios.get('http://127.0.0.1:7777/static/data/goods.json')
-		// 		.then(res => {
-		// 			that.goods  = [...res.data];
-		// 		})
-		// 	})
-		// }
 	}
 	
 </script>

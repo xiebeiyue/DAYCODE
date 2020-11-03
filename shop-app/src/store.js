@@ -61,6 +61,15 @@ export default new Vuex.Store({
 				}
 			})
 		},
+		reduceGoods(state,itemId){
+			state.cartCounter--;
+			state.cartGoods.some(val=>{
+				if(val.id===itemId){
+					val.count--;
+					return true;
+				}
+			})
+		},
 		login(state,username){
 			state.username = username;
 			state.isLogin = true;
@@ -70,6 +79,15 @@ export default new Vuex.Store({
 		},
 		changeCurrentSelKind(state,kind){
 			state.GoodsCurrentSelKind = kind;
+		},
+		addNewAddress(state,newAdd){
+			state.address.push(newAdd);
+		},
+		modifyAddress(state,item){
+			state.address[item.index] = item.value;
+		},
+		deleteAddress(state,index){
+			state.address.splice(index,1);
 		}
 	}
 })
