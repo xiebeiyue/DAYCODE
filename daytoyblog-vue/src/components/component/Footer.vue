@@ -1,0 +1,17 @@
+<template>
+	<div>
+	<footer class="main-footer">
+	<p class="text-center mb-1">
+      Copyright © 2020 DayToy Designed by DayToy Powered by AdminLTE
+    </p>
+    <p class="text-center">
+      <a href="">DayToyBlog</a>
+    </p>
+</footer>
+	</div>
+</template>
+<script>
+	export default{
+		name:'Footer'
+	}
+</script>
