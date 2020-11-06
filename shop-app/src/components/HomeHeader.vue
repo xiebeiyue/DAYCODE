@@ -20,27 +20,27 @@
 		name:"HomeHeader",
 		data(){
 			return{
-				activeName: 'second',
+				// activeName: 'second',
 				kindToType: new Map([
 					['全部',0],
-					['水果',0],
-					['蔬菜',0],
-					['肉蛋',0],
-					['速冻',0],
-					['酒饮',0],
-					['乳品',0],
-					['零食',0]
+					['水果',1],
+					['蔬菜',2],
+					['肉蛋',3],
+					['速冻',4],
+					['酒饮',5],
+					['乳品',6],
+					['零食',7]
 					]),
 				goodsType:'全部'
 			}
 		},
 		methods:{
 			changeGoodsType(){
-				this.$store.state.GoodsCurrenSelKind  = this.kindToType.get(this.goodsType)
+				this.$store.state.GoodsCurrentSelKind  = this.kindToType.get(this.goodsType)
 			},
-			handleClick(tab, event) {
-				console.log(tab, event);
-			}
+			// handleClick(tab, event) {
+			// 	console.log(tab, event);
+			// }
 		},
 	}
 </script>

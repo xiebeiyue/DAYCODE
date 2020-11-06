@@ -16,7 +16,7 @@ import './assets/css/vue2-animate.css'
 Vue.use(ElementUI);
 
 Vue.use(VueAxios,axios)
-// Vue.prototype.axios = axios;
+// Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 

@@ -22,6 +22,9 @@
 				</div>
 			</footer>
 		</div>
+		<transition enter-active-class="slideInRight">
+			<router-view></router-view>
+		</transition>
 	</div>
 </template>
 <script>
@@ -66,50 +69,50 @@
 @import "../assets/css/variable.scss";
 
 .profile{
-  height: 100%;
-  background-color: #fff;
-  position: relative;
-  overflow: hidden;
+	height: 100%;
+	background-color: #fff;
+	position: relative;
+	overflow: hidden;
 }
 .login{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  .el-input{
-    width: 80%;
-    margin-bottom: 10px;
-  }
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	.el-input{
+		width: 80%;
+		margin-bottom: 10px;
+	}
 }
 .wrap{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  .profile-header{
-    height: 50px;
-    line-height: 50px;
-  }
-  .el-button{
-    width: 100%;
-    margin-top: 10px;
-  }
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	.profile-header{
+		height: 50px;
+		line-height: 50px;
+	}
+	.el-button{
+		width: 100%;
+		margin-top: 10px;
+	}
 }
 .slideInRight{
-  animation-duration: 0.25s;
+	animation-duration: 0.25s;
 }
 .user{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  .profile-header{
-    height: 50px;
-    line-height: 50px;
-  }
-  .el-button{
-    width: 100%;
-    margin-top: 10px;
-  }
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	.profile-header{
+		height: 50px;
+		line-height: 50px;
+	}
+	.el-button{
+		width: 100%;
+		margin-top: 10px;
+	}
 }
 </style>

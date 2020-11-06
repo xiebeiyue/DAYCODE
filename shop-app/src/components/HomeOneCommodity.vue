@@ -1,94 +1,98 @@
 <template>
-	<div class="one-commmodity" @click="goToDetailsPage">
-		<div class="left" v-loading="loadingImg">
-			<img :src="imgUrl">
-		</div><!-- v-loading是element-ui的指令 -->
-		<div class="right">
-			<div class="text">
-				<h3 class="title">{{ title }}</h3>
-				<p class="content">{{ content }}</p>
-			<div>		
-			<span class="price"> ￥
-				<span class="price-number">{{ price }}</span>
-			</span>
-		</div>
-	</div>
-	<div class="cart-btn">
-		<el-button icon="el-icon-goods" type="danger" @click.stop.native="addGoodsToCart" v-show="counter === 0" circle></el-button>
-			<my-input-number :count="counter" v-show="counter > 0" @changeNumberEvent="getOperator"></my-input-number>
-	</div>
-</div>
-</div>
+  <div class="one-commodity" @click="goToDetailsPage">
+    <div class="left" v-loading="loadingImg">
+      <img :src="imgUrl">
+    </div>
+    <div class="right">
+      <div class="text">
+        <h3 class="title">{{ title }}</h3>
+        <p class="content">{{ content }}</p>
+        <div>
+          <span class="price"> ￥
+            <span class="price-number">{{ price }}</span>
+          </span>
+        </div>
+      </div>
+     <div class="cart-btn">
+        <el-button icon="el-icon-goods" type="danger" @click.stop.native="addGoodsToCart" v-show="counter === 0" circle> </el-button>
+        <el-input-number size="mini" :count="counter" v-show="counter > 0" min="1" @changeNumberEvent="getOperator"></el-input-number>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script>
-	export default{
-		name:'one-commdity',
-		props:['itemId','imgUrl','title','content','price','count'],
-		data(){
-			return{
-				loadingImg:true,
-				onecommodity:{
-					id:this.itemId,
-					img:this.imgUrl,
-					title:this.title,
-					content:this.content,
-					price:this.price,
-					count:this.count,
-					isInCart:false,
-				}
-			}
-		},
-		computed:{
-			counter(){
-				let that = this;
-				let cartGoods = this.$store.state.cartGoods;
-				let result = 0;
-				cartGoods.some(good=>{
-					if(good.id ===that.itemId){
-						result = good.count;
-					}
-				});
-				return result;
-			}
-		},
-		methods:{
-			addGoodsToCart(){
-				this.$store.commit('addGoodsToCart',this.onecommodity);
-			},
-			getOperator(op){
-				let id = this.onecommodity.id;
-				if(op === 'plus'){
-					this.$store.commit('addGoods',id);
-				}else{
-					let count  = this.$store.state.cartGoods.filter(val =>{
-						return val.id ===id;
-					})[0].count;
-					if(count===1){
-						this.$store.commit('deleteGoodsFromCart',id);
-					}else{
-						this.$store.commit('reduceGoods',id);
-					}
-				}
-			},
-			goToDetailsPage(){
-				this.$store.push({
-					path:'/detailsPpge',
-					query:this.onecommodity,
-				});
-				this.$store.state.cartCounter++;
-				this.$store.state.cartCounter--;
-			},
-		},
-		created(){
-			let img = new Image();
-			img.src = this.imgUrl;
-			img.onload = () =>{
-				this.loadingImg = false;
-			}
-		}
-	}
-	
+
+export default {
+  name: 'one-commodity',
+  props: ['itemId','imgUrl', 'title', 'content', 'price', 'count'],
+  data () {
+    return {
+      loadingImg: true,
+      oneCommodity: {
+        id: this.itemId,
+        img: this.imgUrl,
+        title: this.title,
+        content: this.content,
+        price: this.price,
+        count: this.count,
+        isInCart: false,
+      }
+    }
+  },
+  computed: {
+    counter () {
+      let that = this;
+      let cartGoods = this.$store.state.cartGoods;
+      let result = 0;
+      cartGoods.some(good => {
+        if (good.id === that.itemId) {
+          result = good.count;
+        }
+      });
+      return result;
+    }
+  },
+  methods: {
+    addGoodsToCart () {
+      this.$store.commit('addGoodsToCart', this.oneCommodity);
+    },
+    getOperator (op) {
+      let id = this.oneCommodity.id;
+      if (op === 'plus') {
+        this.$store.commit('addGoods', id);
+      } else {
+        let count = this.$store.state.cartGoods.filter(val => {
+          return val.id === id;
+        })[0].count;
+        if (count === 1) {
+          this.$store.commit('deleteGoodsFromCart', id);
+        } else {
+          this.$store.commit('reduceGoods', id);
+        }
+      }
+    },
+    goToDetailsPage () {
+      this.$router.push({
+        path: '/detailspage',
+        query: this.oneCommodity
+      });
+      //解决主页与详情页切换时，菜单栏无法更新获取当前路由的问题
+      this.$store.state.cartCounter++;
+      this.$store.state.cartCounter--;
+    },
+  },
+  created () {
+    let img = new Image();
+    img.src = this.imgUrl;
+    img.onload = () => {
+      this.loadingImg = false;
+    }
+  }
+}
+
 </script>
+
 <style lang="scss" scoped>
 @import "../assets/css/variable.scss";
 

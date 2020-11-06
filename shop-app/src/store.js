@@ -28,9 +28,9 @@ export default new Vuex.Store({
 				detailAdd:'三亚荣誉酒店三楼234号'
 			}
 		],
-		cartGoods:[],
-		cartCounter:0,
-		GoodsCurrentSelKind:0,
+		cartGoods:[],//添加到购物车中的商品
+		cartCounter:0,//购物车物品总数
+		GoodsCurrentSelKind:0,//表示显示全部分类
 
 	},
 	mutations:{

@@ -4,7 +4,7 @@
 		<div class="home-main">
 		<transition-group enter-active-class="slideInRight">
         <ul class="goods animated" :key="animatedCurrentKey">
-          <li v-for="item in goods" :key="item" class="one-com" v-show="isCurrent(item.kind)">
+          <li v-for="item in goods" :key="item.index" class="one-com" v-show="isCurrent(item.kind)">
             <one-commodity
               :itemId="item.id"
               :imgUrl="item.img"
@@ -53,13 +53,16 @@
 
 		},
 		mounted (){
-			this.axios.get('http://localhost:8080/static/data/goods.json')
+			this.axios.get('../js/goods.json')
 			.then(res => {
-				this.goods = res.data;
-				console.log(res.data);
-			}).catch((res) => {
-				console.log(res);
-				
+				this.goods = [...res.data];
+				console.log(res.data)
+			})
+			.catch(() =>{
+				this.axios.get('../js/github-goods.json')
+				.then(res => {
+					this.goods = [...res.data];
+				})
 			})
 		}
 	}
