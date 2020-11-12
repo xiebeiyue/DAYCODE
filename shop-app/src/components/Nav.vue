@@ -2,10 +2,11 @@
 <nav class="app-nav">
 <router-link to="/home"><div class="nav-item" @click="changeNavImg"><div class="homeImg" :class="homeImgOn"></div></div></router-link>
 <router-link to="/cart"> <div class="nav-item" @click="changeNavImg">
-	<div class="cartImg" :class="cartImgOn"></div></div></router-link>
+	<div class="cartImg" :class="cartImgOn"><span class="cart-counter" v-show="cartCounter > 0">{{ cartCounter }}</span></div></div></router-link>
 		<router-link to="/profile"><div class="nav-item" @click="changeNavImg">
 			<div class="profileImg" :class="profileImgOn"></div></div></router-link>
 		</nav>
+		<!-- <router-view></router-view> -->
 	</template>
 	<script>
 		export default{
@@ -15,6 +16,7 @@
 					homeImgOn:'',
 					cartImgOn:'',
 					profileImgOn:'',
+					imgLoadCount:0
 
 				}
 			},
@@ -49,6 +51,9 @@
 				}
 			},
 			computed:{
+				cartCounter(){
+					return this.$store.state.cartCounter;
+				},
 				currentPath(){
 					return this.$route.path;
 				}

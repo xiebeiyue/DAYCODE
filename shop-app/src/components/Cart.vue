@@ -6,7 +6,7 @@
       <main class="cart-body" v-if="cartGoods.length > 0">
         <div class="wrap">
           <ul class="goods-wrap">
-            <li v-for="item in cartGoods" :key="item" class="cartGoodsItem">
+            <li v-for="item in cartGoods" :key="item.index" class="cartGoodsItem">
               <cart-one-item
                 :itemId="item.id"
                 :imgUrl="item.img"

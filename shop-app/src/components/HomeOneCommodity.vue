@@ -15,14 +15,14 @@
       </div>
      <div class="cart-btn">
         <el-button icon="el-icon-goods" type="danger" @click.stop.native="addGoodsToCart" v-show="counter === 0" circle> </el-button>
-        <el-input-number size="mini" :count="counter" v-show="counter > 0" min="1" @changeNumberEvent="getOperator"></el-input-number>
+       <my-input-number :count="counter" v-show="counter > 0" @changeNumberEvent="getOperator"></my-input-number>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+// import '../../ui/my-own-ui.js'
 export default {
   name: 'one-commodity',
   props: ['itemId','imgUrl', 'title', 'content', 'price', 'count'],
